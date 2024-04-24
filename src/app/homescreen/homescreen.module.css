@@ -1,0 +1,48 @@
+.container {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Pixel';
+}
+.container .workApp, .socialApp, .buyApp {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+}
+.container .color {
+    width: 120px;
+    height: 120px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container span {
+    padding-top: 16px;
+    font-family: 'Pixel';
+    font-family: Pixel;
+    font-size: 44px;
+}
+.container .workApp {
+    left: 14%;
+    top: 40%;
+}
+.container .socialApp {
+    left: 44%;
+    top: 20%;
+}
+.container .buyApp {
+    left: 69%;
+    top: 56%;
+}
+.container .workApp .color {
+    background-color: var(--work-color);
+}
+.container .socialApp .color {
+    background-color: var(--social-color);
+}
+.container .buyApp .color {
+    background-color: var(--buy-color);
+}

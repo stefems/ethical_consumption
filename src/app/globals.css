@@ -1,4 +1,17 @@
+@font-face {
+  font-family: 'Pixel';
+  src: local('Pixel'), url(./fonts/Pixel.otf) format('opentype');
+}
+
 :root {
+
+  --work-color: #182553;
+  --social-color: #D74E5F;
+  --buy-color: #FF9900;
+  --alert-color: #FF0000;
+
+
+
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
