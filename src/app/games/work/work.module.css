@@ -7,14 +7,6 @@
 .work .numbers {
     background-color: var(--work-color);
 }
-.test {
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-    position: fixed;
-    background-color: black;
-    opacity: 0.5;
-}
 .work .numbers .number {
     background-color: unset;
     font-family: 'Pixel';

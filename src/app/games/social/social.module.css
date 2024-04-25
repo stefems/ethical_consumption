@@ -1,0 +1,112 @@
+.social {
+    margin-left: auto;
+    margin-right: 0;
+    width: 80vw;
+    height: 100vh;
+}
+.social .posts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background-color: #D9D9D9;
+    padding-top: 44px;
+    padding-bottom: 43px;
+}
+.social .post {
+    margin-bottom: 44px;
+    background: white;
+}
+
+.social .post .topBar {
+    background-color: var(--social-color);
+    display: flex;
+    align-items: center;
+    padding: 12px;
+}
+
+.social .post .profileCircle {
+    background-color: black;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+
+.social .post .profileName {
+    color: white;
+    font-family: 'Pixel';
+    font-size: 44px;
+    margin-left: 12px;
+}
+
+.social .post .ad {
+    color: white;
+    font-family: 'Pixel';
+    font-size: 22px;
+    margin-left: 12px;
+}
+
+.social .post .image {
+    padding: 24px;
+}
+
+.social .post .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.social .post .bottom .like {
+    background: unset;
+    border: unset;
+    outline: unset;
+    display: flex;
+}
+.social .post .heart.liked {
+    background: pink;
+    border-radius: 8px;
+}
+.social .post .bottom .like:hover {
+    cursor: pointer;
+}
+.social .post .bottom .likeStatus {
+    color: black;
+    font-family: 'Pixel';
+    font-size: 44px;
+    margin-left: 8px;
+}
+
+.social .advertisement {
+    background: black;
+    padding: 24px;
+    position: absolute;
+    z-index: 9999;
+    left: 33%;
+    top: 33%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Pixel';
+    font-size: 44px;
+}
+
+.social .advertisement .close {
+    background-color: unset;
+    border: none;
+    outline: unset;
+    position: absolute;
+    right: 8px;
+    top: 0;
+    font-family: 'Pixel';
+    font-size: 64px;
+    cursor: pointer;
+}
+
+.social .advertisement .ad1 {
+    margin-bottom: 12px;
+}
+
+.social .advertisement .ad2 {
+    margin-top: 12px;
+}
