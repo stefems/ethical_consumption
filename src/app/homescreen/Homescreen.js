@@ -7,8 +7,8 @@ import Image from "next/image";
 
 const gameOverlayText = [
     'Find the Bad Numbers!',
-    'Buy What You Need!',
-    'Like 3 Posts!'
+    'Like 3 Posts!',
+    'Buy What You Need!'
 ]
 
 const Homescreen = (props) => {
@@ -23,6 +23,7 @@ const Homescreen = (props) => {
         setHandMoving(false)
         setHandClick(false)
         setHandVisible(false)
+        setShowOverlay(false)
     }
 
     useEffect(() => {

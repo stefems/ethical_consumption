@@ -51,7 +51,7 @@ const Work = (props) => {
     useEffect(() => {
         if (gameEnded) {
             if (gameWon == null) setGameWon(false)
-            // setTimeout(() => goNext(), 2000)
+            setTimeout(() => goNext(), 2000)
         }
     }, [gameEnded])
 
@@ -65,12 +65,12 @@ const Work = (props) => {
 
     return (
         <div className={styles.work}>
-            {/* {started && <Overlay seconds={1} text={'Find the Bad Numbers!'}/>} */}
             <Timer started={started} gameEnded={gameEnded} endGame={() => setGameEnded(true)}/>
             {started && <div className={styles.numbers}>
                 {numbers && numbers.map((number) => {
                     return (
                         <button
+                            disabled={gameEnded}
                             onClick={(event) => clickNumber(number.flipped, event)}
                             className={`${styles.number} ${number.flipped && styles.flipped}`}
                         >

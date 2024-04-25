@@ -29,8 +29,29 @@ const Timer = (props) => {
     }, [])
     
     return (
-        <div className={styles.timer}>
-
+        <div className={styles.container}>
+            <div className={styles.timer}>
+                {!gameEnded &&
+                    <Image
+                        src="/flame.png"
+                        alt="pixelated candle flame"
+                        className={`${styles.flame}`}
+                        priority
+                        width={76}
+                        height={57}
+                    />
+                }
+                {!gameEnded &&
+                    <Image
+                        src="/candle.png"
+                        alt="pixelated candle"
+                        className={`${styles.candle}`}
+                        priority
+                        width={150}
+                        height={930}
+                    />
+                }
+            </div>
         </div>
     )
 }
