@@ -11,6 +11,11 @@
     justify-content: center;
     position: absolute;
 }
+.container .workApp.click, .socialApp.click, .buyApp.click {
+    animation: click .5s;
+    animation-iteration-count: 1;
+}
+
 .container .color {
     width: 120px;
     height: 120px;
@@ -19,6 +24,22 @@
     align-items: center;
     justify-content: center;
 }
+.container .color .alert {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--alert-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    padding: 0;
+    animation: alert infinite;
+    animation-duration: .5s;
+}
 .container span {
     padding-top: 16px;
     font-family: 'Pixel';
@@ -26,16 +47,16 @@
     font-size: 44px;
 }
 .container .workApp {
-    left: 14%;
-    top: 40%;
+    left: 14vw;
+    top: 40vh;
 }
 .container .socialApp {
-    left: 44%;
-    top: 20%;
+    left: 44vw;
+    top: 20vh;
 }
 .container .buyApp {
-    left: 69%;
-    top: 56%;
+    left: 69vw;
+    top: 56vh;
 }
 .container .workApp .color {
     background-color: var(--work-color);
@@ -45,4 +66,59 @@
 }
 .container .buyApp .color {
     background-color: var(--buy-color);
+}
+.container .hand {
+    position: absolute;
+    transform: translate(100vw, 100vh);
+    transition: transform 1s linear;
+}
+
+.container .hand.app0 {
+    transform: translate(10vw, 40vh);
+}
+.container .hand.app1 {
+    transform: translate(40vw, 20vh);
+
+}.container .hand.app2 {
+    transform: translate(65vw, 56vh);
+}
+
+.container .hand .handClick {
+    animation: click .5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes click {
+    0% {
+        transform: scale(90%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+@keyframes alert {
+    0% {
+        font-size: 50px;
+        width: 60px;
+        height: 60px;
+
+        top: -30px;
+        right: -30px;
+    }
+    25% {
+        top: -25px;
+        right: -25px;
+        color: black;
+    }
+    50% {
+        top: -45px;
+        right: -45px;
+        color: white;
+    }
+    100% {
+        font-size: 80px;
+        top: -40px;
+        right: -40px;
+        color: black;
+    }
 }
