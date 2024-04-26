@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Homescreen from "./homescreen/Homescreen";
 import Work from './games/work/Work';
 import Social from './games/social/Social';
+import Buy from './games/buy/Buy';
 
 export default function Home() {
   const [started, setStarted] = useState(false);
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     if (started) {
       setOnHome(true);
-      setAppAlert(1);
+      setAppAlert(2);
     }
   }, [started])
 
@@ -39,8 +40,8 @@ export default function Home() {
       }
       {started && onHome && <Homescreen appAlert={appAlert} setActiveGame={setActiveGame}/>}
       {!onHome && activeGame === 0 && <Work goNext={goNext} />}
-      {activeGame === 1 && <Social />}
-      {/* {activeGame === 0 && <Buy />} */}
+      {!onHome && activeGame === 1 && <Social goNext={goNext} />}
+      {!onHome && activeGame === 2 && <Buy goNext={goNext} />}
     </main>
   );
 }

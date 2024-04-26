@@ -14,6 +14,9 @@
     padding-top: 44px;
     padding-bottom: 43px;
 }
+.social .posts.scrollLock {
+    overflow: hidden;
+}
 .social .post {
     margin-bottom: 44px;
     background: white;
@@ -63,6 +66,15 @@
     outline: unset;
     display: flex;
 }
+.social .post .bottom .like:disabled {
+    cursor: unset;
+}
+.social .post .bottom .like:disabled:hover {
+    cursor: unset;
+}
+.social .post .heart {
+    pointer-events: none;
+}
 .social .post .heart.liked {
     background: pink;
     border-radius: 8px;
@@ -103,8 +115,18 @@
     cursor: pointer;
 }
 
+.social .adWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.6);
+}
 .social .advertisement .ad1 {
     margin-bottom: 12px;
+    max-width: 80%;
+    text-align: center;
 }
 
 .social .advertisement .ad2 {

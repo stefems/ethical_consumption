@@ -1,0 +1,121 @@
+.buy {
+    margin-left: auto;
+    margin-right: 0;
+    width: 80vw;
+    height: 100vh;
+    background-color: #D9D9D9;
+}
+.buy .logo {
+    color: var(--buy-color);
+    font-size: 84px;
+    font-family: 'Pixel';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buy .items {
+    background-color: #D9D9D9;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+    padding: 44px;
+    column-gap: 24px;
+    row-gap: 24px;
+    margin-top: 44px;
+    padding-bottom: 240px;
+}
+.buy .items .item {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.buy .items .item .top {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Pixel';
+    color: black;
+    width: 100%;
+    font-size: 44px;
+    padding-bottom: 12px;
+}
+.buy .items .item .stars {
+    display: flex;
+    padding-bottom: 12px;
+    width: 100%;
+}
+.buy .items .item .star.filled {
+    background-color: yellow;
+    border-radius: 4px;
+}
+
+.itemButton {
+    margin-top: 12px;
+    background: var(--buy-color);
+    color: black;
+    padding: 12px 24px;
+    font-size: 44px;
+    font-family: 'Pixel';
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.buy .note {
+    position: fixed;
+    background-color: yellow;
+    border: black 4px solid;
+    display: flex;
+    flex-direction: column;
+    top: 2vh;
+    right: 2vw;
+}
+.buy .note .topBar {
+    background-color: white;
+    height: 44px;
+    width: 100%;
+}
+
+.buy .note .text {
+    font-family: 'Pixel';
+    color: black;
+    font-size: 44px;
+    padding: 12px 44px 44px 44px;
+}
+
+.buy .note .text li {
+    margin-left: 22px;
+    font-size: 34px;
+}
+
+.buy .checkout {
+    position: fixed;
+    bottom: 0;
+    left: 20vw;
+    background: white;
+    padding: 24px;
+    border: solid black 4px;
+}
+.buy .cartWrapper {
+    margin-left: 24px;
+}
+.buy .cartWrapper .cartNumber {
+    color: black;
+    font-size: 44px;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background-color: var(--buy-color);
+    border-radius: 50%;
+    padding: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pixel';
+}

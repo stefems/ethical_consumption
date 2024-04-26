@@ -7,7 +7,7 @@
     background: white;
 }
 .timer {
-    position: absolute;
+    position: fixed;
     left: 0;
     background: white;
     width: 20vw;
