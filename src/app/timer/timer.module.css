@@ -6,6 +6,16 @@
     height: 100vh;
     background: white;
 }
+.pointsContainer {
+    position: fixed;
+    left: 0;
+    top: 24px;
+    width: 20vw;
+    text-align: center;
+    color: black;
+    font-family: 'Pixel';
+    font-size: 28px;
+}
 .timer {
     position: fixed;
     left: 0;
@@ -16,7 +26,9 @@
     height: 100vh;
     bottom: 0;
     align-items: self-end;
-    animation: candle linear 6s 1;
+    animation: candle;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
 }
 
 .timer .flame {

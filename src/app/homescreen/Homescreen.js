@@ -4,12 +4,15 @@ import Overlay from "@/app/overlay/Overlay";
 
 import styles from "./homescreen.module.css";
 import Image from "next/image";
+import BouncingText from "../bouncingText/BouncingText";
 
 const gameOverlayText = [
     'Find the Bad Numbers!',
     'Like 3 Posts!',
     'Buy What You Need!'
 ]
+
+const overlayTime = 4000
 
 const Homescreen = (props) => {
     const { appAlert, setActiveGame } = props;
@@ -42,13 +45,13 @@ const Homescreen = (props) => {
             setTimeout(() => {
                 setActiveGame(appAlert)
                 reset()
-            }, 1400);
+            }, overlayTime + 400);
         }
     }, [handClick])
 
     return (
         <div className={styles.container}>
-            {showOverlay && <Overlay seconds={1} text={gameOverlayText[appAlert]}/>}
+            {showOverlay && <Overlay countdown={true} seconds={overlayTime/1000} text={gameOverlayText[appAlert]} />}
             <div className={`${styles.workApp} ${handClick && appAlert === 0 && styles.click}`}>
                 <div className={styles.color}>
                     {appAlert === 0 && <span className={styles.alert}>
@@ -63,7 +66,7 @@ const Homescreen = (props) => {
                         height={80}
                     />
                 </div>
-                <span>WORK</span>
+                {appAlert === 0 ? <BouncingText text="WORK" /> : <span>WORK</span>}
             </div>
             <div className={`${styles.socialApp} ${handClick && appAlert === 1 && styles.click}`}>
                 <div className={styles.color}>
@@ -79,7 +82,7 @@ const Homescreen = (props) => {
                         height={90}
                     />
                 </div>
-                <span>SOCIAL</span>
+                {appAlert === 1 ? <BouncingText text="SOCIAL" /> : <span>SOCIAL</span>}
             </div>
             <div className={`${styles.buyApp} ${handClick && appAlert === 2 && styles.click}`}>
                 <div className={styles.color}>
@@ -95,7 +98,7 @@ const Homescreen = (props) => {
                         height={65}
                     />
                 </div>
-                <span>BUY</span>
+                {appAlert === 2 ? <BouncingText text="BUY" /> : <span>BUY</span>}
             </div>
             {handVisible && <div
                 className={`

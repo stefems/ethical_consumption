@@ -1,17 +1,18 @@
 'use client'
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import styles from "./timer.module.css";
+import BouncingText from "../bouncingText/BouncingText";
 
 const Timer = (props) => {
-    const { started, endGame, gameEnded } = props
+    const { started, endGame, gameEnded, time, points } = props
     const timer = useRef()
 
     useEffect(() => {
         if (started) {
             timer.current = setTimeout(() => {
                 endGame && endGame();
-            }, 5000)
+            }, time || 5000)
         }
     }, [started])
 
@@ -30,7 +31,13 @@ const Timer = (props) => {
     
     return (
         <div className={styles.container}>
-            <div className={styles.timer}>
+            <div className={styles.pointsContainer}>
+                <BouncingText text={`Current Score is ${points}!`} />
+            </div>
+            <div
+                style={{ 'animationDuration': time ? (time/1000 + 's') : '6s' }}
+                className={styles.timer}
+            >
                 {!gameEnded &&
                     <Image
                         src="/flame.png"

@@ -5,6 +5,7 @@ import Image from "next/image";
 import shuffle from '@/app/utils/shuffle';
 import Timer from '@/app/timer/Timer';
 import Overlay from "@/app/overlay/Overlay";
+import BouncingText from '@/app/bouncingText/BouncingText';
 
 const adText = [
     'Limited time offer!',
@@ -35,7 +36,7 @@ const companyNames = [
 ]
 
 const Social = (props) => {
-    const { goNext } = props;
+    const { goNext, points, setPoints } = props;
     const [started, setStarted] = useState(false)
     const [posts, setPosts] = useState([])
     const [gameEnded, setGameEnded] = useState(false)
@@ -101,9 +102,24 @@ const Social = (props) => {
         }
     }, [gameEnded])
 
+    useEffect(() => {
+        if (gameWon) {
+            setPoints(points + 20)
+            // game win noise
+        } else if (gameWon === false) {
+            setPoints(points - 10)
+            // game lose noise
+        }
+    }, [gameWon])
+
     return (
         <div className={styles.social}>
-            <Timer started={started} gameEnded={gameEnded} endGame={() => setGameEnded(true)}/>
+            <Timer
+                points={points}
+                started={started}
+                gameEnded={gameEnded}
+                endGame={() => setGameEnded(true)}
+            />
             {showingAd && <div className={styles.adWrapper}>
                 <div className={styles.advertisement}>
                     <button onClick={() => setShowingAd(false)} className={styles.close}>
@@ -159,15 +175,15 @@ const Social = (props) => {
                                     width={50}
                                     height={50}
                                 />
+                                <span className={styles.likeStatus}>
+                                    {post.liked ? <BouncingText text='Liked!' /> : 'Not liked yet...'}
+                                </span>
                             </button>
-                            <span className={styles.likeStatus}>
-                                {post.liked ? 'Liked!': 'Not liked yet...'}
-                            </span>
                         </div>
                     </div>
                 ))}
             </div>
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Yay! Socializing!' : 'Ugh, stop being weird.'}/>}
+            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Yay! Socializing! \n plus 20 score' : "Why not like stuff?! \n minus 10 score"}/>}
         </div>
     )
 }

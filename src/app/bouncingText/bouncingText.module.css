@@ -1,0 +1,31 @@
+.bouncingText .char {
+    position: relative;
+    display: inline-block;
+}
+.bouncingText .char.up {
+    animation: waveUp infinite;
+}
+.bouncingText .char.down {
+    animation: waveDown infinite;
+}
+
+.bouncingText .space {
+    min-width: 1rem;
+}
+
+@keyframes waveUp{
+    0%,40%,100% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-.7rem);
+    }
+}
+@keyframes waveDown{
+    0%,40%,100% {
+        transform: translateY(-.1rem);
+    }
+    20% {
+        transform: translateY(0);
+    }
+}

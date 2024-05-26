@@ -65,6 +65,7 @@
     border: unset;
     outline: unset;
     display: flex;
+    align-items: center;
 }
 .social .post .bottom .like:disabled {
     cursor: unset;
@@ -116,6 +117,7 @@
 }
 
 .social .adWrapper {
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;

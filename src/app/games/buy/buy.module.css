@@ -64,6 +64,11 @@
     border-radius: 4px;
     cursor: pointer;
 }
+.itemButton:disabled {
+    pointer-events: none;
+    color: #808080cf;
+    background: #ff9900b0;
+}
 
 .buy .note {
     position: fixed;
@@ -118,4 +123,47 @@
     align-items: center;
     justify-content: center;
     font-family: 'Pixel';
+}
+.buy .checkoutPage {
+    background-color: white;
+    padding: 24px;
+    margin: 44px;
+}
+.buy .checkoutPage .item {
+    color: black;
+    font-family: 'Pixel';
+}
+.buy .checkoutPage .item .itemName {
+    font-size: 64px;
+}
+.buy .checkoutPage .item .itemRow {
+    display: flex;
+    border-bottom: solid 1px black;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+}
+
+.buy .checkoutPage .item .info {
+    display: flex;
+    flex-direction: column;
+    font-size: 44px;
+    margin-left: 24px;
+}
+.buy .checkoutPage .item .extra {
+    text-decoration: underline;
+}
+.buy .checkoutPage .item .cost {
+    margin-left: auto;
+    font-size: 64px;
+}
+.buy .total {
+    color: black;
+    font-family: 'Pixel';
+    font-size: 64px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.buy .total .itemButton {
+    margin-top: 0;
 }

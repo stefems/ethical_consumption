@@ -7,6 +7,7 @@ import Image from "next/image";
 import Timer from "@/app/timer/Timer";
 import Overlay from "@/app/overlay/Overlay";
 import shuffle from '@/app/utils/shuffle';
+import BouncingText from '@/app/bouncingText/BouncingText';
 
 const itemNames = [
     { name: 'blender', cost: '70.00', cheaper: '30.00' },
@@ -22,14 +23,14 @@ const itemNames = [
     { name: 'belt', cost: '20.00', cheaper: '10.00' },
     { name: 'backpack', cost: '70.00', cheaper: '35.00' },
     { name: 'sweater', cost: '20.00', cheaper: '10.00' },
-    { name:  'cleaning supplies', cost: '15.00', cheaper: '8.00' },
-    { name:  'vitamins', cost: '10.00', cheaper: '5.00' },
-    { name:  'toilet paper', cost: '8.00', cheaper: '4.00' },
-    { name:  'shampoo', cost: '7.00', cheaper: '3.00' },
-    { name:  'light bulbs', cost: '20.00', cheaper: '10.00' },
-    { name:  'shower curtain', cost: '10.00', cheaper: '5.00' },
-    { name:  'plunger', cost: '20.00', cheaper: '10.00' },
-    { name:  'rug', cost: '40.00', cheaper: '20.00' }
+    { name: 'cleaning supplies', cost: '15.00', cheaper: '8.00' },
+    { name: 'vitamins', cost: '10.00', cheaper: '5.00' },
+    { name: 'toilet paper', cost: '8.00', cheaper: '4.00' },
+    { name: 'shampoo', cost: '7.00', cheaper: '3.00' },
+    { name: 'light bulbs', cost: '20.00', cheaper: '10.00' },
+    { name: 'shower curtain', cost: '10.00', cheaper: '5.00' },
+    { name: 'plunger', cost: '20.00', cheaper: '10.00' },
+    { name: 'rug', cost: '40.00', cheaper: '20.00' }
 ]
 
 const badDescriptions = [
@@ -39,14 +40,14 @@ const badDescriptions = [
     'mistreats workers'
 ]
 const goodDescriptions = [
-    'union-made',
+    'union made',
     'recycled materials',
     'independently ownded',
-    'low-waste packaging',
+    'low waste packaging',
     'uses fair wages'
 ]
 const Buy = (props) => {
-    const { goNext } = props;
+    const { goNext, time, points, setPoints } = props;
     const [started, setStarted] = useState(false)
     const [gameEnded, setGameEnded] = useState(false)
     const [checkingOut, setCheckingOut] = useState(false)
@@ -54,6 +55,7 @@ const Buy = (props) => {
     const [items, setItems] = useState([])
     const [mainItems, setMainItems] = useState([])
     const [cart, setCart] = useState([])
+    const [endMessage, setEndMessage] = useState('')
 
     useEffect(() => {
         if (!started) {
@@ -70,14 +72,18 @@ const Buy = (props) => {
                     cost: item.cheaper,
                     stars: Math.floor(Math.random() * 2) + 1,
                     description: badDescriptions[Math.floor(Math.random() * badDescriptions.length)],
-                    key: Math.random()
+                    key: Math.random(),
+                    ethical: false,
+                    needed: true
                 })
                 prepItems.push({
                     ...item,
                     cost: item.cost,
                     stars: Math.floor(Math.random() * 3) + 3,
                     description: goodDescriptions[Math.floor(Math.random() * goodDescriptions.length)],
-                    key: Math.random()
+                    key: Math.random(),
+                    ethical: true,
+                    needed: true
                 })
             })
             const unrelatedItems = []
@@ -92,7 +98,8 @@ const Buy = (props) => {
                         cost: newItem.cheaper,
                         stars: Math.floor(Math.random() * 2) + 1,
                         description: badDescriptions[Math.floor(Math.random() * badDescriptions.length)],
-                        key: Math.random()
+                        key: Math.random(),
+                        needed: false
                     })
                 }
             }
@@ -104,21 +111,30 @@ const Buy = (props) => {
 
     useEffect(() => {
         if (gameEnded) {
-            // if (gameWon == null) setGameWon(false)
-            // setTimeout(() => goNext(), 2000)
+            if (gameWon === null) {
+                setGameWon(false)
+                setEndMessage('The sale ended! \n minus 10 score')
+            }
+            setTimeout(() => goNext(), 2000)
         }
     }, [gameEnded])
 
     useEffect(() => {
         if (gameWon) {
             // game win noise
+            setPoints(points + 60)
         } else if (gameWon === false) {
             // game lose noise
+            setPoints(points - 10)
         }
     }, [gameWon])
 
     const inCart = (_key) => {
         return Boolean(cart.find(({ key }) => key === _key))
+    }
+
+    const cartTotal = () => {
+        return cart.reduce((reduction, item) => parseInt(item.cost) + reduction, 0)
     }
 
     const add = (item) => {
@@ -133,11 +149,34 @@ const Buy = (props) => {
         setCart(newItems);
     }
 
+    const purchase = () => {
+        let finalMessage = 'buying cheap stuff feels good! \n plus 60 score'
+        won = true
+        cart.forEach((item) => {
+            if (item.needed === false) {
+                finalMessage = "Oops, we didn't need to buy that! \n minus 10 score"
+                won = false
+            } else if (item.ethical === true) {
+                won = false
+                finalMessage = "buying ethically is so expensive... \n minus 10 score"
+            }
+        })
+        setEndMessage(finalMessage)
+        setGameWon(won)
+        setGameEnded(true)
+    }
+
     return (
         <div className={styles.buy}>
-            <Timer started={started} gameEnded={gameEnded} endGame={() => setGameEnded(true)}/>
+            <Timer
+                points={points}
+                started={started}
+                gameEnded={gameEnded}
+                endGame={() => setGameEnded(true)}
+                time={time}
+            />
             <div className={styles.logo}>
-                amacon
+                <BouncingText text="amacon" />
                 <Image
                     src="/amacon.png"
                     alt="amacon arrow logo"
@@ -147,7 +186,7 @@ const Buy = (props) => {
                     height={48}
                 />
             </div>
-            <div className={styles.items}>
+            {!checkingOut && <div className={styles.items}>
                 {items.map((item, i) => (
                     <div key={item.key} className={styles.item}>
                         <div className={styles.top}>
@@ -157,6 +196,7 @@ const Buy = (props) => {
                         <div className={styles.stars}>
                             {[...Array(5)].map((value, index) => (
                                 <Image
+                                    key={item.name + '_star' + index}
                                     src={'/star.png'}
                                     alt="pixelated star icon"
                                     className={`${styles.star} ${index <= item.stars && styles.filled}`}
@@ -167,7 +207,7 @@ const Buy = (props) => {
                             ))}
                         </div>
                         <Image
-                            src={'/px/px1.png'}
+                            src={`/px/items/${item.name}.png`}
                             alt="vague pixelated image"
                             className={`${styles.image}`}
                             priority
@@ -192,18 +232,18 @@ const Buy = (props) => {
                         }
                     </div>
                 ))}
-            </div>
+            </div>}
             <div className={styles.note}>
                 <div className={styles.topBar} />
                 <div className={styles.text}>
-                    <span>NEed!</span>
+                    <BouncingText text="I Need!" />
                     <ul>
                         <li>new {mainItems[0]}</li>
                         <li>new {mainItems[1]}</li>
                     </ul>
                 </div>
             </div>
-            <div className={styles.checkout}>
+            {!checkingOut && <div className={styles.checkout}>
                 <div className={styles.cartWrapper}>
                     <Image
                         src="/cart.png"
@@ -216,13 +256,50 @@ const Buy = (props) => {
                     <span className={styles.cartNumber}>{cart.length}</span>
                 </div>
                 <button
+                    disabled={cart.length < 2}
                     onClick={() => setCheckingOut(true)}
-                    className={styles.itemButton}
+                    className={`${styles.itemButton}`}
                 >
                     CHECKOUT!
                 </button>
+            </div>}
+            {checkingOut && <div className={styles.checkoutPage}>
+                {cart.map((item, i) => (
+                    <div key={'cart_' + item.key} className={styles.item}>
+                        <span className={styles.itemName}>{item.name}</span>
+                        <div className={styles.itemRow}>
+                            <Image
+                                src={`/px/items/${item.name}.png`}
+                                alt="amacon arrow logo"
+                                className={`${styles.logo}`}
+                                priority
+                                width={188}
+                                height={144}
+                            />
+                            <div className={styles.info}>
+                                <span className={styles.extra}>Extra info</span>
+                                <span>{item.description}</span>
+                                <span>{item.stars} out of 5 stars</span>
+                            </div>
+                            <span className={styles.cost}>
+                                {item.cost}
+                            </span>
+                        </div>
+                    </div>
+                ))}
+                <div className={styles.total}>
+                    <span>total</span>
+                    <span>{cartTotal()}.00</span>
+                    <button
+                        onClick={purchase}
+                        className={styles.itemButton}
+                    >
+                        <BouncingText text="purchase!" />
+                    </button>
+                </div>
             </div>
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Buying feels good!' : 'HMM'}/>}
+            }
+            {gameEnded && gameWon != null && <Overlay seconds={2} text={endMessage}/>}
         </div>
     )
 }

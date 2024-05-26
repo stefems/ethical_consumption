@@ -7,7 +7,7 @@ import Timer from "@/app/timer/Timer";
 import Overlay from "@/app/overlay/Overlay";
 
 const Work = (props) => {
-    const { goNext } = props;
+    const { goNext, points, setPoints } = props;
     const [numbers, setNumbers] = useState(null);
     const [started, setStarted] = useState(false)
     const [corrections, setCorrections] = useState(0);
@@ -57,19 +57,27 @@ const Work = (props) => {
 
     useEffect(() => {
         if (gameWon) {
+            setPoints(points + 50)
             // game win noise
         } else if (gameWon === false) {
+            setPoints(points - 20)
             // game lose noise
         }
     }, [gameWon])
 
     return (
         <div className={styles.work}>
-            <Timer started={started} gameEnded={gameEnded} endGame={() => setGameEnded(true)}/>
+            <Timer
+                points={points}
+                started={started}
+                gameEnded={gameEnded}
+                endGame={() => setGameEnded(true)}
+            />
             {started && <div className={styles.numbers}>
                 {numbers && numbers.map((number) => {
                     return (
                         <button
+                            key={Math.random()}
                             disabled={gameEnded}
                             onClick={(event) => clickNumber(number.flipped, event)}
                             className={`${styles.number} ${number.flipped && styles.flipped}`}
@@ -110,7 +118,7 @@ const Work = (props) => {
                     )}
                 </div>
             </div>}
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Good Work!' : 'Poor Performance!'}/>}
+            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Good Work! \n plus 50 Score' : 'Poor Performance! \n minus 20 score'}/>}
         </div>
     )
 }

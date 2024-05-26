@@ -4,8 +4,51 @@
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
+  color: white;
 }
-
+main .titleInfo {
+  font-family: 'Pixel';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+main .caption {
+  margin: 24px 24px 0 24px;
+  font-family: 'Pixel';
+  font-size: 70px;
+  color: var(--social-color);
+}
+main .title {
+  font-family: 'Pixel';
+  font-size: 140px;
+  margin: 24px;
+}
+main .subtitle {
+  font-family: 'Pixel';
+  font-size: 40px;
+  color: var(--buy-color);
+}
+main .info {
+  font-family: 'Pixel'; 
+  font-size: 40px;
+}
+main .titleInfo .startGame {
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: white;
+  color: black;
+  font-family: 'Pixel'; 
+  font-size: 40px;
+  padding: 24px;
+  margin-top: 44px;
+  cursor: pointer;
+}
+main .titleInfo .startGame:hover {
+  background-color: rgba(255, 255, 255, 0.27);
+}
 .description {
   display: inherit;
   justify-content: inherit;
