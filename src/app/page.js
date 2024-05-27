@@ -14,7 +14,7 @@ export default function Home() {
   const [activeGame, setActiveGame] = useState(null);
   const [appAlert, setAppAlert] = useState(null);
   const [points, setPoints] = useState(100)
-  const [day, setDay] = useState(1)
+  const [day, setDay] = useState(1) //reset back to 1
 
   useEffect(() => {
     if (started) {
@@ -32,6 +32,7 @@ export default function Home() {
   const goNext = () => {
     setOnHome(true)
     if (appAlert == 2 ) {
+      setAppAlert(null)
       setShowDayEnd(true)
       setTimeout(() => {
         setShowDayEnd(false)
@@ -65,9 +66,9 @@ export default function Home() {
         </div>
       )}
       {started && onHome && <Homescreen showDayEnd={showDayEnd} day={day} appAlert={appAlert} setActiveGame={setActiveGame}/>}
-      {!onHome && activeGame === 0 && <Work goNext={goNext} points={points} setPoints={setPoints} />}
-      {!onHome && activeGame === 1 && <Social goNext={goNext} points={points} setPoints={setPoints} />}
-      {!onHome && activeGame === 2 && <Buy goNext={goNext} points={points} time={10000} setPoints={setPoints} />}
+      {!onHome && activeGame === 0 && <Work goNext={goNext} points={points} setPoints={setPoints} day={day} />}
+      {!onHome && activeGame === 1 && <Social goNext={goNext} points={points} setPoints={setPoints} day={day} />}
+      {!onHome && activeGame === 2 && <Buy goNext={goNext} points={points} time={10000} setPoints={setPoints} day={day} />}
     </main>
   );
 }

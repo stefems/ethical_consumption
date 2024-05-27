@@ -5,9 +5,10 @@ import Image from "next/image";
 import styles from "./work.module.css";
 import Timer from "@/app/timer/Timer";
 import Overlay from "@/app/overlay/Overlay";
+import Notification from '@/app/notification/Notification';
 
 const Work = (props) => {
-    const { goNext, points, setPoints } = props;
+    const { goNext, points, setPoints, day } = props;
     const [numbers, setNumbers] = useState(null);
     const [started, setStarted] = useState(false)
     const [corrections, setCorrections] = useState(0);
@@ -67,6 +68,7 @@ const Work = (props) => {
 
     return (
         <div className={styles.work}>
+            <Notification day={day}/>
             <Timer
                 points={points}
                 started={started}

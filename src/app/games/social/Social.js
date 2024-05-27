@@ -1,11 +1,12 @@
 import styles from './social.module.css'
-import usernameMaker from '../../utils/usernameMaker'
+import { getName } from '../../utils/usernameMaker.js'
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import shuffle from '@/app/utils/shuffle';
 import Timer from '@/app/timer/Timer';
 import Overlay from "@/app/overlay/Overlay";
 import BouncingText from '@/app/bouncingText/BouncingText';
+import Notification from '@/app/notification/Notification';
 
 const adText = [
     'Limited time offer!',
@@ -36,7 +37,7 @@ const companyNames = [
 ]
 
 const Social = (props) => {
-    const { goNext, points, setPoints } = props;
+    const { goNext, points, setPoints, day } = props;
     const [started, setStarted] = useState(false)
     const [posts, setPosts] = useState([])
     const [gameEnded, setGameEnded] = useState(false)
@@ -52,7 +53,7 @@ const Social = (props) => {
             let prepPosts = [];
             for (let i = 0; i < 9; i++) {
                 const isAdvertisement = Math.floor(Math.random() * 2) === 1;
-                prepPosts.push({ username: usernameMaker(), isAd: isAdvertisement, liked: false, image: `/px/px${i+1}.png` })
+                prepPosts.push({ username: getName(), isAd: isAdvertisement, liked: false, image: `/px/px${i+1}.png` })
             }
             shuffle(prepPosts);
             setPosts(prepPosts);
@@ -114,6 +115,7 @@ const Social = (props) => {
 
     return (
         <div className={styles.social}>
+            <Notification day={day}/>
             <Timer
                 points={points}
                 started={started}

@@ -8,6 +8,7 @@ import Timer from "@/app/timer/Timer";
 import Overlay from "@/app/overlay/Overlay";
 import shuffle from '@/app/utils/shuffle';
 import BouncingText from '@/app/bouncingText/BouncingText';
+import Notification from '@/app/notification/Notification';
 
 const itemNames = [
     { name: 'blender', cost: '70.00', cheaper: '30.00' },
@@ -47,7 +48,7 @@ const goodDescriptions = [
     'uses fair wages'
 ]
 const Buy = (props) => {
-    const { goNext, time, points, setPoints } = props;
+    const { goNext, time, points, setPoints, day } = props;
     const [started, setStarted] = useState(false)
     const [gameEnded, setGameEnded] = useState(false)
     const [checkingOut, setCheckingOut] = useState(false)
@@ -115,7 +116,7 @@ const Buy = (props) => {
                 setGameWon(false)
                 setEndMessage('The sale ended! \n minus 10 score')
             }
-            setTimeout(() => goNext(), 2000)
+            setTimeout(() => goNext(), 2000) //reset back
         }
     }, [gameEnded])
 
@@ -170,6 +171,7 @@ const Buy = (props) => {
 
     return (
         <div className={styles.buy}>
+            <Notification day={day}/>
             <Timer
                 points={points}
                 started={started}
