@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     if (started) {
       setOnHome(true);
-      setAppAlert(2)
+      setAppAlert(0) //reset back to 0
     }
   }, [started])
 

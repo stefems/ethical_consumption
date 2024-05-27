@@ -151,18 +151,20 @@ const Buy = (props) => {
 
     const purchase = () => {
         let finalMessage = 'buying cheap stuff feels good! \n plus 60 score'
-        won = true
-        cart.forEach((item) => {
+        let wonChange = true
+        for(let i = 0; i < cart.length; i++){
+            const item = cart[i]
             if (item.needed === false) {
-                finalMessage = "Oops, we didn't need to buy that! \n minus 10 score"
-                won = false
+                finalMessage = "Oops, why did we buy that? \n minus 10 score"
+                wonChange = false
+                break
             } else if (item.ethical === true) {
-                won = false
+                wonChange = false
                 finalMessage = "buying ethically is so expensive... \n minus 10 score"
             }
-        })
+        }
         setEndMessage(finalMessage)
-        setGameWon(won)
+        setGameWon(wonChange)
         setGameEnded(true)
     }
 
@@ -299,7 +301,7 @@ const Buy = (props) => {
                 </div>
             </div>
             }
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={endMessage}/>}
+            {gameEnded && gameWon != null && <Overlay seconds={200} text={endMessage}/>}
         </div>
     )
 }
