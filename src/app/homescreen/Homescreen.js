@@ -5,6 +5,7 @@ import Overlay from "@/app/overlay/Overlay";
 import styles from "./homescreen.module.css";
 import Image from "next/image";
 import BouncingText from "../bouncingText/BouncingText";
+import DayEnd from "../dayEnd/DayEnd";
 
 const gameOverlayText = [
     'Find the Bad Numbers!',
@@ -15,7 +16,7 @@ const gameOverlayText = [
 const overlayTime = 4000
 
 const Homescreen = (props) => {
-    const { appAlert, setActiveGame } = props;
+    const { appAlert, setActiveGame, day, showDayEnd } = props;
 
     const [handVisible, setHandVisible] = useState(false)
     const [handMoving, setHandMoving] = useState(false)
@@ -30,7 +31,7 @@ const Homescreen = (props) => {
     }
 
     useEffect(() => {
-        if (!handMoving && appAlert != null) {
+        if (!handMoving && appAlert != null && !showDayEnd) {
             setHandVisible(true);
             setTimeout(() => setHandMoving(true), 1000);
             setTimeout(() => setHandClick(true), 2000);
@@ -51,6 +52,7 @@ const Homescreen = (props) => {
 
     return (
         <div className={styles.container}>
+            {showDayEnd && <DayEnd /> }
             {showOverlay && <Overlay countdown={true} seconds={overlayTime/1000} text={gameOverlayText[appAlert]} />}
             <div className={`${styles.workApp} ${handClick && appAlert === 0 && styles.click}`}>
                 <div className={styles.color}>
@@ -115,6 +117,9 @@ const Homescreen = (props) => {
                     height={736}
                 />
             </div>}
+            <div className={styles.day}>
+                Day {day}
+            </div>
         </div>
     )
 }

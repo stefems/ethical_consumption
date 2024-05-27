@@ -6,19 +6,20 @@ import Homescreen from "./homescreen/Homescreen";
 import Work from './games/work/Work';
 import Social from './games/social/Social';
 import Buy from './games/buy/Buy';
-import BouncingText from "./bouncingText/BouncingText";
 
 export default function Home() {
   const [started, setStarted] = useState(false);
   const [onHome, setOnHome] = useState(false);
+  const [showDayEnd, setShowDayEnd] = useState(false);
   const [activeGame, setActiveGame] = useState(null);
   const [appAlert, setAppAlert] = useState(null);
   const [points, setPoints] = useState(100)
+  const [day, setDay] = useState(1)
 
   useEffect(() => {
     if (started) {
       setOnHome(true);
-      setAppAlert(0)
+      setAppAlert(2)
     }
   }, [started])
 
@@ -30,7 +31,16 @@ export default function Home() {
 
   const goNext = () => {
     setOnHome(true)
-    setAppAlert(appAlert == 2 ? 0 : appAlert + 1)
+    if (appAlert == 2 ) {
+      setShowDayEnd(true)
+      setTimeout(() => {
+        setShowDayEnd(false)
+        setDay((day) => day + 1)
+        setAppAlert(0)
+      }, 2000)
+    } else {
+      setAppAlert(appAlert + 1)
+    }
   }
 
   return (
@@ -54,7 +64,7 @@ export default function Home() {
           </button>
         </div>
       )}
-      {started && onHome && <Homescreen appAlert={appAlert} setActiveGame={setActiveGame}/>}
+      {started && onHome && <Homescreen showDayEnd={showDayEnd} day={day} appAlert={appAlert} setActiveGame={setActiveGame}/>}
       {!onHome && activeGame === 0 && <Work goNext={goNext} points={points} setPoints={setPoints} />}
       {!onHome && activeGame === 1 && <Social goNext={goNext} points={points} setPoints={setPoints} />}
       {!onHome && activeGame === 2 && <Buy goNext={goNext} points={points} time={10000} setPoints={setPoints} />}

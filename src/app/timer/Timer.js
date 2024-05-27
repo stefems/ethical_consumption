@@ -32,7 +32,7 @@ const Timer = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.pointsContainer}>
-                <BouncingText text={`Current Score is ${points}!`} />
+                <BouncingText text={`Current Score is ${points < 0 ? 'negative ' : ''}${(points + '').replace('-', '')}!`} />
             </div>
             <div
                 style={{ 'animationDuration': time ? (time/1000 + 's') : '6s' }}
