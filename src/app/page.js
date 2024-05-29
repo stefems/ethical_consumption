@@ -6,6 +6,7 @@ import Homescreen from "./homescreen/Homescreen";
 import Work from './games/work/Work';
 import Social from './games/social/Social';
 import Buy from './games/buy/Buy';
+import AudioModule from "./audioModule/AudioModule";
 
 export default function Home() {
   const [started, setStarted] = useState(false);
@@ -14,12 +15,14 @@ export default function Home() {
   const [activeGame, setActiveGame] = useState(null);
   const [appAlert, setAppAlert] = useState(null);
   const [points, setPoints] = useState(100)
+  const [playAudio, setPlayAudio] = useState(false) 
   const [day, setDay] = useState(1) //reset back to 1
 
   useEffect(() => {
     if (started) {
       setOnHome(true);
       setAppAlert(0) //reset back to 0
+      setPlayAudio(true)
     }
   }, [started])
 
@@ -38,14 +41,17 @@ export default function Home() {
         setShowDayEnd(false)
         setDay((day) => day + 1)
         setAppAlert(0)
+        setPlayAudio(true)
       }, 2000)
     } else {
+      setPlayAudio(true)
       setAppAlert(appAlert + 1)
     }
   }
 
   return (
     <main>
+      <AudioModule fileUrl={'/main_att_eco.m4a'} play={playAudio} done={() => setPlayAudio(false)}/>
       {!started && (
         <div className={styles.titleInfo}>
           <div className={styles.caption}>
