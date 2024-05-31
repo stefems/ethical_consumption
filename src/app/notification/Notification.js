@@ -41,13 +41,10 @@ const Notification = (props) => {
     const message = messages[Math.floor(Math.random() * messages.length)]
 
     useEffect(() => {
-       if (day === 2) {
-            const chance = ((Math.floor(Math.random() * 3) + 1) % 3) === 0
-            setShowing(chance)
-        } else if (day === 3) {
+        if (day <= 2) {
             const chance = ((Math.floor(Math.random() * 2) + 1) % 2) === 0
             setShowing(chance)
-        } else if (day > 3) {
+        } else if (day >= 3) {
             setShowing(true)
         }
     }, [])
@@ -56,7 +53,7 @@ const Notification = (props) => {
         if (showing) {
             setTimeout(() => {
                 setShowing(false)
-            }, 2000)
+            }, 2000) 
         }
     }, [showing])
 

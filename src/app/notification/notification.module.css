@@ -17,7 +17,6 @@
     font-family: 'Pixel';
     font-size: 44px;
     display: flex;
-    justify-content: space-between;
     animation: appear 200ms 1 steps(2, end);
     animation-timing-function: ease;
 }

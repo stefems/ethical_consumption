@@ -16,12 +16,12 @@ export default function Home() {
   const [appAlert, setAppAlert] = useState(null);
   const [points, setPoints] = useState(100)
   const [playAudio, setPlayAudio] = useState(false) 
-  const [day, setDay] = useState(1) //reset back to 1
+  const [day, setDay] = useState(2) //reset back to 1
 
   useEffect(() => {
     if (started) {
       setOnHome(true);
-      setAppAlert(0) //reset back to 0
+      setAppAlert(2) //reset back to 0
       setPlayAudio(true)
     }
   }, [started])
