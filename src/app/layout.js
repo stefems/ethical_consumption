@@ -4,7 +4,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ethical Consumption",
+  title: "Undivided Attention",
   description: "Fuck Capitalism Game Jam 2024",
 };
 
