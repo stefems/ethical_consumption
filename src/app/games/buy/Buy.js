@@ -169,7 +169,7 @@ const Buy = (props) => {
         }
         setEndMessage(finalMessage)
         setGameWon(wonChange)
-        setGameEnded(true)
+        // setGameEnded(true)
     }
 
     return (
@@ -307,7 +307,7 @@ const Buy = (props) => {
                 </div>
             </div>
             }
-            {gameEnded && gameWon != null && <Overlay seconds={200} text={endMessage}/>}
+            {gameWon != null && <Overlay seconds={200} text={endMessage}/>}
         </div>
     )
 }

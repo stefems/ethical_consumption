@@ -21,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     if (started) {
       setOnHome(true);
-      setAppAlert(0) //reset back to 0
+      setAppAlert(2) //reset back to 0
       setPlayAudio(true)
     }
   }, [started])

@@ -92,7 +92,7 @@ const Social = (props) => {
     useEffect(() => {
         if (likes >= 3) {
             setGameWon(true)
-            setGameEnded(true)
+            // setGameEnded(true)
         }
     }, [likes])
 
@@ -190,7 +190,7 @@ const Social = (props) => {
                     </div>
                 ))}
             </div>
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Yay! Socializing! \n plus 20 score' : "Why not like stuff?! \n minus 10 score"}/>}
+            {gameWon !== null && <Overlay seconds={20} text={gameWon === true ? 'Yay! Socializing! \n plus 20 score' : "Why not like stuff?! \n minus 10 score"}/>}
         </div>
     )
 }

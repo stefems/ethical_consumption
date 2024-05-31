@@ -45,10 +45,10 @@ const Work = (props) => {
     useEffect(() => {
         if (errors === 3) {
             setGameWon(false)
-            setGameEnded(true)
+            // setGameEnded(true)
         } else if (corrections === 3) {
             setGameWon(true)
-            setGameEnded(true)
+            // setGameEnded(true)
         }
     }, [errors, corrections])
 
@@ -125,7 +125,7 @@ const Work = (props) => {
                     )}
                 </div>
             </div>}
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Good Work! \n plus 50 Score' : 'Poor Performance! 3 bad numbers needed! \n minus 20 score'}/>}
+            {gameWon != null && <Overlay seconds={20} text={gameWon === true ? 'Good Work! \n plus 50 Score' : 'Poor Performance! 3 bad numbers needed! \n minus 20 score'}/>}
         </div>
     )
 }
