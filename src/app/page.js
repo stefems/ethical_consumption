@@ -51,7 +51,7 @@ export default function Home() {
 
   return (
     <main>
-      <AudioModule fileUrl={'/main_att_eco.m4a'} play={playAudio} done={() => setPlayAudio(false)}/>
+      <AudioModule fileUrl={'/music/main_att_eco.m4a'} play={playAudio} done={() => setPlayAudio(false)}/>
       {!started && (
         <div className={styles.titleInfo}>
           <div className={styles.caption}>

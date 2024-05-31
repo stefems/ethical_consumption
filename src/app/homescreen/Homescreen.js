@@ -8,7 +8,7 @@ import BouncingText from "../bouncingText/BouncingText";
 import DayEnd from "../dayEnd/DayEnd";
 
 const gameOverlayText = [
-    'Find the Bad Numbers!',
+    'Click 3 Reversed Numbers!',
     'Like 3 Posts!',
     'Buy What You Need!'
 ]

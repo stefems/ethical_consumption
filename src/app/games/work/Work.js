@@ -6,6 +6,7 @@ import styles from "./work.module.css";
 import Timer from "@/app/timer/Timer";
 import Overlay from "@/app/overlay/Overlay";
 import Notification from '@/app/notification/Notification';
+import AudioModule from "@/app/audioModule/AudioModule";
 
 const Work = (props) => {
     const { goNext, points, setPoints, day } = props;
@@ -15,10 +16,12 @@ const Work = (props) => {
     const [errors, setErrors] = useState(0);
     const [gameEnded, setGameEnded] = useState(false)
     const [gameWon, setGameWon] = useState(null)
+    const [playAudio, setPlayAudio] = useState(false) 
 
     useEffect(() => {
         if (!started) {
             setStarted(true);
+            setPlayAudio(true)
             let prepNumbers = [];
             for (let i = 0; i < 2000; i++) {
                 const isFlipped = Math.floor(Math.random() * 30) === 9;
@@ -68,8 +71,10 @@ const Work = (props) => {
 
     return (
         <div className={styles.work}>
+            <AudioModule fileUrl={'/music/work_theme_att_eco.m4a'} play={playAudio} done={() => setPlayAudio(false)}/>
             <Notification day={day}/>
             <Timer
+                time={8500}
                 points={points}
                 started={started}
                 gameEnded={gameEnded}
@@ -120,7 +125,7 @@ const Work = (props) => {
                     )}
                 </div>
             </div>}
-            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Good Work! \n plus 50 Score' : 'Poor Performance! \n minus 20 score'}/>}
+            {gameEnded && gameWon != null && <Overlay seconds={2} text={gameWon === true ? 'Good Work! \n plus 50 Score' : 'Poor Performance! 3 bad numbers needed! \n minus 20 score'}/>}
         </div>
     )
 }

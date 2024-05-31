@@ -1,23 +1,44 @@
+'use client'
+
 import { useState, useEffect } from "react";
 
 const AudioModule = (props) => {
   const { fileUrl, play, done } = props
-  const [audio] = useState(new Audio(fileUrl));
+  const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
 
 
   useEffect(() => {   
-    audio.addEventListener('ended', () => {
-      audio.pause()
-      setPlaying(false)
-  });
-    return () => {
-      audio.removeEventListener('ended', () => {
+    setAudio(new Audio(fileUrl))
+    if (audio) {
+      audio.addEventListener('ended', () => {
         audio.pause()
         setPlaying(false)
-    });
-    };
+      });
+      return () => {
+        audio.removeEventListener('ended', () => {
+          audio.pause()
+          setPlaying(false)
+       });
+      };
+    }
   }, []);
+
+  useEffect(() => {
+    if (audio) {
+      audio.addEventListener('ended', () => {
+        audio.pause()
+        setPlaying(false)
+      });
+      return () => {
+        audio.removeEventListener('ended', () => {
+          audio.pause()
+          setPlaying(false)
+       });
+      };
+    }
+  }, [audio]);
+  
 
   useEffect(() => {
     if (playing === false) {

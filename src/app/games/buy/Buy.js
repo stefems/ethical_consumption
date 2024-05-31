@@ -9,6 +9,7 @@ import Overlay from "@/app/overlay/Overlay";
 import shuffle from '@/app/utils/shuffle';
 import BouncingText from '@/app/bouncingText/BouncingText';
 import Notification from '@/app/notification/Notification';
+import AudioModule from '@/app/audioModule/AudioModule';
 
 const itemNames = [
     { name: 'blender', cost: '70.00', cheaper: '30.00' },
@@ -57,10 +58,12 @@ const Buy = (props) => {
     const [mainItems, setMainItems] = useState([])
     const [cart, setCart] = useState([])
     const [endMessage, setEndMessage] = useState('')
+    const [playAudio, setPlayAudio] = useState(false) 
 
     useEffect(() => {
         if (!started) {
             setStarted(true);
+            setPlayAudio(true)
             let prepItems = [];
             const desiredItems = [
                 itemNames[Math.floor(Math.random() * Math.floor(itemNames.length/2))],
@@ -171,6 +174,7 @@ const Buy = (props) => {
 
     return (
         <div className={styles.buy}>
+            <AudioModule fileUrl={'/music/buy_theme_att_eco.m4a'} play={playAudio} done={() => setPlayAudio(false)}/>
             <Notification day={day}/>
             <Timer
                 points={points}

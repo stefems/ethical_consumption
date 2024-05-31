@@ -7,6 +7,7 @@ import Timer from '@/app/timer/Timer';
 import Overlay from "@/app/overlay/Overlay";
 import BouncingText from '@/app/bouncingText/BouncingText';
 import Notification from '@/app/notification/Notification';
+import AudioModule from '@/app/audioModule/AudioModule';
 
 const adText = [
     'Limited time offer!',
@@ -45,11 +46,13 @@ const Social = (props) => {
     const [showingAd, setShowingAd] = useState(false)
     const [likes, setLikes] = useState(0)
     const [ad, setAd] = useState()
+    const [playAudio, setPlayAudio] = useState(false) 
 
     // create posts
     useEffect(() => {
         if (!started) {
             setStarted(true);
+            setPlayAudio(true)
             let prepPosts = [];
             for (let i = 0; i < 9; i++) {
                 const isAdvertisement = Math.floor(Math.random() * 2) === 1;
@@ -115,8 +118,10 @@ const Social = (props) => {
 
     return (
         <div className={styles.social}>
+            <AudioModule fileUrl={'/music/social_theme_att_eco.m4a'} play={playAudio} done={() => setPlayAudio(false)}/>
             <Notification day={day}/>
             <Timer
+                time={11000}
                 points={points}
                 started={started}
                 gameEnded={gameEnded}
